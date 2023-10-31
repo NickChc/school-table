@@ -4,20 +4,52 @@ const geoBtn = document.querySelector("#geoBtn");
 const mathBtn = document.querySelector("#mathBtn");
 const engBtn = document.querySelector("#engBtn");
 
+// buttons for choosing week
+
+const firstWkBtn = document.querySelector("#firstWeek");
+const secondWkBtn = document.querySelector("#secondWeek");
+const thirdWkBtn = document.querySelector("#thirdWeek");
+
+// function for buttons to change color onclick
+const subBtnsArr = [geoBtn, mathBtn, engBtn];
+const weekBtnsArr = [firstWkBtn, secondWkBtn, thirdWkBtn];
+
+function buttonChange(btnsArr, currentBtn) {
+  btnsArr.forEach((btn) => {
+    if (btn !== currentBtn) {
+      btn.classList.remove("buttons-clicked");
+    }
+    currentBtn.classList.add("buttons-clicked");
+  });
+}
+
+// event listeners for week buttons
+
+
+firstWkBtn.addEventListener("click", () => {
+  buttonChange(weekBtnsArr, firstWkBtn);
+});
+
+secondWkBtn.addEventListener("click", () => {
+    buttonChange(weekBtnsArr, secondWkBtn);
+});
+
+thirdWkBtn.addEventListener("click", () => {
+    buttonChange(weekBtnsArr, thirdWkBtn);
+});
+
+
+
+// event listeners forsubjects buttons
+
 geoBtn.addEventListener("click", () => {
-    geoBtn.classList.add("buttons-clicked");
-    mathBtn.classList.remove("buttons-clicked");
-    engBtn.classList.remove("buttons-clicked");
+    buttonChange(subBtnsArr, geoBtn);
 });
 
 mathBtn.addEventListener("click", () => {
-  geoBtn.classList.remove("buttons-clicked");
-  mathBtn.classList.add("buttons-clicked");
-  engBtn.classList.remove("buttons-clicked");
+    buttonChange(subBtnsArr, mathBtn);
 });
 
 engBtn.addEventListener("click", () => {
-  geoBtn.classList.remove("buttons-clicked");
-  mathBtn.classList.remove("buttons-clicked");
-  engBtn.classList.add("buttons-clicked");
+  buttonChange(subBtnsArr, engBtn);
 });
