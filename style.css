@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --space-4: 4px;
+    --space-8: 8px;
+    --space-10: 10px;
+    --space-12: 12px;
+    --space-16: 16px;
+    --space-24: 24px;
+    --space-36: 36px;
+    --space-60: 60px;
+    --space-70: 70px;
+    --space-90: 90px;
+
+    --primary-text-color: #fff;
+
+    --primary-btn-color: purple;
+}
+
+
+.table-wrapper {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.table-div {
+    width: 90%;
+    margin-top: var(--space-24);
+    min-height: 80vh;
+    border: solid 1px black;
+
+    position: relative;
+}
+
+.top-section {
+    margin-top: var(--space-12);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subjects {
+    margin-left: var(--space-12);
+}
+
+.filters {
+    margin-right: var(--space-70);
+}
+
+.top-p {
+    margin-bottom: var(--space-12);
+}
+
+.buttons {
+    padding: var(--space-12) var(--space-16);
+    border: solid 1px var(--primary-btn-color);
+    color: var(--primary-btn-color);
+    border-radius: var(--space-8);
+    cursor: pointer;
+}
+
+.buttons-clicked {
+    background-color: var(--primary-btn-color);
+    color: var(--primary-text-color);
+}
+
+/* part with tables */
+
+.tables-holder {
+    margin-top: var(--space-36);
+    margin-left: var(--space-60);
+    margin-right: var(--space-90);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.students-table {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.table-item {
+    border: solid 1px black;
+    padding: var(--space-10) var(--space-16);
+    overflow: hidden;
+
+}
+
+.grades-table {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+}
+
+/* add button */
+
+#addBtn {
+    border: solid 1px var(--primary-btn-color);
+    background-color: var(--primary-btn-color);
+    color: #fff;
+    border-radius: var(--space-8);
+    padding: var(--space-12) var(--space-16);
+    cursor: pointer;
+
+    position: absolute;
+    bottom: var(--space-12);
+    left: var(--space-12);
+}
