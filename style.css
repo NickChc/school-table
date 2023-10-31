@@ -79,7 +79,8 @@
 .tables-holder {
     margin-top: var(--space-36);
     margin-left: var(--space-60);
-    margin-right: var(--space-90);
+    /* margin-right: var(--space-90); */
+    width: 90%;
 
     display: flex;
     justify-content: space-between;
@@ -88,6 +89,7 @@
 
 
 .students-table {
+    width: 16%;
     display: grid;
     grid-template-columns: auto auto;
 }
@@ -96,10 +98,12 @@
     border: solid 1px black;
     padding: var(--space-10) var(--space-16);
     overflow: hidden;
+    text-align: center;
 
 }
 
 .grades-table {
+    width: 80%;
     display: grid;
     grid-template-columns: auto auto auto auto auto;
 }
