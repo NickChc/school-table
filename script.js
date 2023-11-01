@@ -1,3 +1,15 @@
+// QUERYING ITEMS FROM HTML
+
+// button for adding students
+
+const addBtn = document.querySelector("#addBtn");
+
+// grades table
+
+const gradesTable = document.querySelector("#grades");
+const grades = gradesTable.querySelectorAll(".table-item");
+
+
 // buttons for choosing subject
 
 const geoBtn = document.querySelector("#geoBtn");
@@ -40,10 +52,19 @@ thirdWkBtn.addEventListener("click", () => {
 
 
 
-// event listeners forsubjects buttons
+// event listeners for subjects buttons
+
+const geoGrades = [];
+const mathGrades = [];
+const engGrades = [];
+
+
 
 geoBtn.addEventListener("click", () => {
     buttonChange(subBtnsArr, geoBtn);
+
+    grades.forEach((grade) => geoGrades.push(grade.textContent)); // not READY!
+    console.log(geoGrades);
 });
 
 mathBtn.addEventListener("click", () => {
@@ -53,3 +74,13 @@ mathBtn.addEventListener("click", () => {
 engBtn.addEventListener("click", () => {
   buttonChange(subBtnsArr, engBtn);
 });
+
+
+// event listener for add students button
+addBtn.addEventListener("click", () => {
+  
+});
+
+
+
+
