@@ -95,6 +95,14 @@
   padding: var(--space-10) var(--space-16);
   overflow: hidden;
   text-align: center;
+  cursor: pointer;
+}
+
+.table-name {
+  border: solid 1px black;
+  padding: var(--space-10) var(--space-16);
+  overflow: hidden;
+  text-align: center;
 }
 
 .table-item-title {

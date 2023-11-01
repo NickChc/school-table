@@ -146,15 +146,34 @@ function newStudentTable(studArr) {
 
   gradeDiv1.classList.add("table-item");
   gradeDiv1.textContent = "-";
+  editableDiv(gradeDiv1);
   gradeDiv2.classList.add("table-item");
   gradeDiv2.textContent = "-";
+  editableDiv(gradeDiv2);
   gradeDiv3.classList.add("table-item");
   gradeDiv3.textContent = "-";
+  editableDiv(gradeDiv3);
   gradeDiv4.classList.add("table-item");
   gradeDiv4.textContent = "-";
+  editableDiv(gradeDiv4);
   gradeDiv5.classList.add("table-item");
   gradeDiv5.textContent = "-";
+  editableDiv(gradeDiv5);
 
   gradesTable.append(gradeDiv1, gradeDiv2, gradeDiv3, gradeDiv4, gradeDiv5);
   studTable.append(nameDiv, surnameDiv);
+}
+
+// making divs editable
+function editableDiv(div) {
+  div.addEventListener("click", () => {
+    div.setAttribute("contenteditable", "true");
+    div.focus();
+    div.textContent = "";
+    div.addEventListener("keydown", (event) => {
+      if (event.keyCode === 13) {
+        div.removeAttribute("contenteditable");
+      }
+    });
+  });
 }
