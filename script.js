@@ -76,14 +76,15 @@ engBtn.addEventListener("click", () => {
 
 // students array
 const students = [];
+const student = {};
+let nameCheck = false;
+let surnameCheck = false;
 
 // event listener for add students button
 addBtn.addEventListener("click", () => {
-  let nameCheck = false;
-  let surnameCheck = false;
   myModal.style.display = "block";
   nameInput.focus();
-  const student = {};
+
   nameInput.addEventListener("keydown", (event) => {
     if (event.keyCode === 13) {
       if (nameInput.value !== "") {
@@ -106,54 +107,54 @@ addBtn.addEventListener("click", () => {
       }
     });
   });
-  confirmBtn.addEventListener("click", () => {
-    if (nameInput !== "" && surnameInput !== "") {
-      if (nameCheck === false) {
-        student.name = nameInput.value;
-      }
-      if (surnameCheck === false) {
-        student.surname = surnameInput.value;
-        students.push(student);
-      }
-      newStudentTable(students);
-      nameInput.value = "";
-      surnameInput.value = "";
-      myModal.style.display = "none";
-    }
-  })
 });
 
+confirmBtn.addEventListener("click", () => {
+  if (nameInput.value !== "" && surnameInput.value !== "") {
+    if (nameCheck === false) {
+      student.name = nameInput.value;
+    }
+    if (surnameCheck === false) {
+      student.surname = surnameInput.value;
+      students.push(student);
+    }
+    newStudentTable(students);
+    nameInput.value = "";
+    surnameInput.value = "";
+    myModal.style.display = "none";
+  }
+});
 
 // function for creating table
 function newStudentTable(studArr) {
-  studArr.forEach((student) => {
-    const nameDiv = document.createElement("div");
-    const surnameDiv = document.createElement("div");
+  const currentStudent = studArr[studArr.length - 1];
 
-    nameDiv.textContent = student.name;
-    surnameDiv.textContent = student.surname;
+  const nameDiv = document.createElement("div");
+  const surnameDiv = document.createElement("div");
 
-    nameDiv.classList.add("table-item");
-    surnameDiv.classList.add("table-item");
+  nameDiv.textContent = currentStudent.name;
+  surnameDiv.textContent = currentStudent.surname;
 
-    const gradeDiv1 = document.createElement("div");
-    const gradeDiv2 = document.createElement("div");
-    const gradeDiv3 = document.createElement("div");
-    const gradeDiv4 = document.createElement("div");
-    const gradeDiv5 = document.createElement("div");
+  nameDiv.classList.add("table-item");
+  surnameDiv.classList.add("table-item");
 
-    gradeDiv1.classList.add("table-item");
-    gradeDiv1.textContent = "-";
-    gradeDiv2.classList.add("table-item");
-    gradeDiv2.textContent = "-";
-    gradeDiv3.classList.add("table-item");
-    gradeDiv3.textContent = "-";
-    gradeDiv4.classList.add("table-item");
-    gradeDiv4.textContent = "-";
-    gradeDiv5.classList.add("table-item");
-    gradeDiv5.textContent = "-";
+  const gradeDiv1 = document.createElement("div");
+  const gradeDiv2 = document.createElement("div");
+  const gradeDiv3 = document.createElement("div");
+  const gradeDiv4 = document.createElement("div");
+  const gradeDiv5 = document.createElement("div");
 
-    gradesTable.append(gradeDiv1, gradeDiv2, gradeDiv3, gradeDiv4, gradeDiv5);
-    studTable.append(nameDiv, surnameDiv);
-  });
+  gradeDiv1.classList.add("table-item");
+  gradeDiv1.textContent = "-";
+  gradeDiv2.classList.add("table-item");
+  gradeDiv2.textContent = "-";
+  gradeDiv3.classList.add("table-item");
+  gradeDiv3.textContent = "-";
+  gradeDiv4.classList.add("table-item");
+  gradeDiv4.textContent = "-";
+  gradeDiv5.classList.add("table-item");
+  gradeDiv5.textContent = "-";
+
+  gradesTable.append(gradeDiv1, gradeDiv2, gradeDiv3, gradeDiv4, gradeDiv5);
+  studTable.append(nameDiv, surnameDiv);
 }
