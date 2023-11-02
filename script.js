@@ -41,6 +41,7 @@ function buttonChange(btnsArr, currentBtn) {
 
 // event listeners for week buttons
 
+buttonChange(weekBtnsArr, firstWkBtn);
 firstWkBtn.addEventListener("click", () => {
   buttonChange(weekBtnsArr, firstWkBtn);
 });
@@ -58,6 +59,8 @@ thirdWkBtn.addEventListener("click", () => {
 const geoGrades = [];
 const mathGrades = [];
 const engGrades = [];
+
+buttonChange(subBtnsArr, geoBtn);
 
 geoBtn.addEventListener("click", () => {
   buttonChange(subBtnsArr, geoBtn);
@@ -173,6 +176,9 @@ function editableDiv(div) {
     div.addEventListener("keydown", (event) => {
       if (event.keyCode === 13) {
         div.removeAttribute("contenteditable");
+        if (div.textContent === "") {
+          div.textContent = "-";
+        }
       }
     });
   });
