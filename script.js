@@ -28,7 +28,7 @@ const thirdWkBtn = document.querySelector("#thirdWeek");
 
 // function for buttons to change color onclick
 const subBtnsArr = [geoBtn, mathBtn, engBtn];
-const weekBtnsArr = [firstWkBtn, secondWkBtn, thirdWkBtn];
+const weekBtnsArr = [firstWkBtn, secondWkBtn, thirdWkBtn]; // -----------------------------
 
 function buttonChange(btnsArr, currentBtn) {
   btnsArr.forEach((btn) => {
@@ -56,17 +56,66 @@ thirdWkBtn.addEventListener("click", () => {
 
 // event listeners for subjects buttons
 
-const geoGrades = [];
-const mathGrades = [];
-const engGrades = [];
+const geoGrades = {
+  firstWeek: [],
+  secondWeek: [],
+  thirdWeek: [],
+};
+const mathGrades = {
+  firstWeek: [],
+  secondWeek: [],
+  thirdWeek: [],
+};
+const engGrades = {
+  firstWeek: [],
+  secondWeek: [],
+  thirdWeek: [],
+};
+
+// function for adding default elements to table every time it loads
+function tableTitles() {
+  const name = document.createElement("div");
+  name.classList.add("table-name");
+  name.textContent = "სახელი:";
+  const surname = document.createElement("div");
+  surname.classList.add("table-name");
+  surname.textContent = "გვარი:";
+
+  const weekDay1 = document.createElement("div");
+  weekDay1.classList.add("table-item-title");
+  weekDay1.textContent = "ორშაბათი";
+  const weekDay2 = document.createElement("div");
+  weekDay2.classList.add("table-item-title");
+  weekDay2.textContent = "სამშაბათი";
+  const weekDay3 = document.createElement("div");
+  weekDay3.classList.add("table-item-title");
+  weekDay3.textContent = "ოთხშაბათი";
+  const weekDay4 = document.createElement("div");
+  weekDay4.classList.add("table-item-title");
+  weekDay4.textContent = "ხუთშაბათი";
+  const weekDay5 = document.createElement("div");
+  weekDay5.classList.add("table-item-title");
+  weekDay5.textContent = "პარასკევი";
+
+  studTable.append(name, surname);
+  gradesTable.append(weekDay1, weekDay2, weekDay3, weekDay4, weekDay5);
+}
 
 buttonChange(subBtnsArr, geoBtn);
 
 geoBtn.addEventListener("click", () => {
-  buttonChange(subBtnsArr, geoBtn);
+  studTable.innerHTML = "";
+  gradesTable.innerHTML = "";
 
-  grades.forEach((grade) => geoGrades.push(grade.textContent)); // not READY!
-  console.log(geoGrades);
+  tableTitles();
+
+  buttonChange(subBtnsArr, geoBtn);
+  loadTable(students, geoGrades.firstWeek);
+
+  const grades = gradesTable.querySelectorAll(".table-item");
+
+  grades.forEach((grade) => geoGrades.firstWeek.push(grade.textContent)); // not READY!
+  console.log(geoGrades.firstWeek);
 });
 
 mathBtn.addEventListener("click", () => {
@@ -79,12 +128,15 @@ engBtn.addEventListener("click", () => {
 
 // students array
 const students = [];
-const student = {};
 let nameCheck = false;
 let surnameCheck = false;
 
 // event listener for add students button
 addBtn.addEventListener("click", () => {
+  
+
+  const student = {};
+
   myModal.style.display = "block";
   nameInput.focus();
 
@@ -104,39 +156,43 @@ addBtn.addEventListener("click", () => {
           nameInput.value = "";
           surnameInput.value = "";
           myModal.style.display = "none";
-          students.push(student);
-          newStudentTable(students);
+          // students.push(student);
+          newStudentTable(student);
+          console.log(students);
+          students.push(Object.assign({},student));
         }
+
       }
     });
   });
-});
-
-confirmBtn.addEventListener("click", () => {
-  if (nameInput.value !== "" && surnameInput.value !== "") {
-    if (nameCheck === false) {
-      student.name = nameInput.value;
+  confirmBtn.addEventListener("click", () => {
+    if (nameInput.value !== "" && surnameInput.value !== "") {
+      if (nameCheck === false) {
+        student.name = nameInput.value;
+      }
+      if (surnameCheck === false) {
+        student.surname = surnameInput.value;
+        // students.push(student);
+      }
+      students.push(Object.assign({}, student));
+      newStudentTable(student,);
+      nameInput.value = "";
+      surnameInput.value = "";
+      myModal.style.display = "none";
     }
-    if (surnameCheck === false) {
-      student.surname = surnameInput.value;
-      students.push(student);
-    }
-    newStudentTable(students);
-    nameInput.value = "";
-    surnameInput.value = "";
-    myModal.style.display = "none";
-  }
+    console.log(students);
+  });
 });
 
 // function for creating table
-function newStudentTable(studArr) {
-  const currentStudent = studArr[studArr.length - 1];
+function newStudentTable(student, gradesArr) {
+  // const currentStudent = studArr[studArr.length - 1]; // IDK why
 
   const nameDiv = document.createElement("div");
   const surnameDiv = document.createElement("div");
 
-  nameDiv.textContent = currentStudent.name;
-  surnameDiv.textContent = currentStudent.surname;
+  nameDiv.textContent = student.name;
+  surnameDiv.textContent = student.surname;
 
   nameDiv.classList.add("table-item");
   surnameDiv.classList.add("table-item");
@@ -147,24 +203,24 @@ function newStudentTable(studArr) {
   const gradeDiv4 = document.createElement("div");
   const gradeDiv5 = document.createElement("div");
 
-  gradeDiv1.classList.add("table-item");
-  gradeDiv1.textContent = "-";
-  editableDiv(gradeDiv1);
-  gradeDiv2.classList.add("table-item");
-  gradeDiv2.textContent = "-";
-  editableDiv(gradeDiv2);
-  gradeDiv3.classList.add("table-item");
-  gradeDiv3.textContent = "-";
-  editableDiv(gradeDiv3);
-  gradeDiv4.classList.add("table-item");
-  gradeDiv4.textContent = "-";
-  editableDiv(gradeDiv4);
-  gradeDiv5.classList.add("table-item");
-  gradeDiv5.textContent = "-";
-  editableDiv(gradeDiv5);
+  const gradeDivs = [gradeDiv1, gradeDiv2, gradeDiv3, gradeDiv4, gradeDiv5];
+
+  gradeDivs.forEach((gradeDiv) => {
+    gradeDiv.classList.add("table-item");
+    editableDiv(gradeDiv);
+    if (gradesArr === undefined) {
+      gradeDiv.textContent = "-";
+    } else {
+      gradesArr.forEach((grade) => {
+        gradeDiv.textContent = grade;
+      });
+    }
+  });
 
   gradesTable.append(gradeDiv1, gradeDiv2, gradeDiv3, gradeDiv4, gradeDiv5);
   studTable.append(nameDiv, surnameDiv);
+
+  // studArr.push(student);
 }
 
 // making divs editable
@@ -183,3 +239,37 @@ function editableDiv(div) {
     });
   });
 }
+
+// students = [
+//   {
+//     name: "whatever",
+//     surname: "whateverenever",
+//     grades: [geoGrades, mathGrades, engGrades],
+//   },
+// ];
+
+// function for loading table
+function loadTable(students, subject, week) {
+  students.forEach((student) => {
+    newStudentTable(students, subject.week);
+  });
+  console.log(students);
+}
+
+// 
+// const someArr = [];
+
+
+// function someFunc(array, firstName, lastName) {
+//   const person = {};
+
+//   person.name = firstName;
+//   person.surname = lastName;
+
+//   array.push(person);
+
+//   console.log(array);
+// };
+
+// someFunc(someArr, "nika", "chichua");
+// someFunc(someArr, "beber", "beberson");
